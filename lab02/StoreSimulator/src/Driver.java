@@ -1,13 +1,14 @@
 import java.util.Scanner;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 public class Driver {
+    static StockItem milk;
+    static StockItem bread;
+
     public Driver() {
-
-    }
-
-    public static void StartDriver() {
-        StockItem milk = new StockItem("1 Gallon of Milk", 3.60f, 15);
-        StockItem bread = new StockItem("1 Loaf of Bread", 1.98f, 30);
+        milk = new StockItem("1 Gallon of Milk", 3.60f, 15);
+        bread = new StockItem("1 Loaf of Bread", 1.98f, 30);
     }
 
     public static void ReadInput() {
@@ -18,16 +19,19 @@ public class Driver {
             while (input != 8) {
                 switch (input) {
                     case 1:
-
+                        milk.lowerQuantity();
                         break;
                     case 2:
-
+                        bread.lowerQuantity();
                         break;
                     case 3:
-
+                        float newPrice = readPrice(sc);
+                        milk.setPrice(input);
                         break;
                     case 4:
-
+                        float newPrice = readPrice(sc);
+                        bread.setPrice(input);
+                        break;
                         break;
                     case 5:
 
@@ -36,7 +40,8 @@ public class Driver {
 
                         break;
                     case 7:
-
+                        System.out.println(milk);
+                        System.out.println(bread);
                         break;
                     default:
                         break;
@@ -45,6 +50,21 @@ public class Driver {
             }
         } catch (Exception e) {
             System.out.println("Invalid input!");
+        }
+    }
+
+    public static float readPrice(Scanner sc)
+    {
+        try {
+            float input = sc.nextFloat();
+
+
+
+            return input;
+        } catch (Exception e) {
+            // TODO: handle exception
+
+            return 0.0f;
         }
     }
 

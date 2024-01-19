@@ -4,7 +4,6 @@ public class StockItem {
     private float price;
     private int quantity;
 
-    // Getters
     public String getDescription()
     {
         return this.description;
