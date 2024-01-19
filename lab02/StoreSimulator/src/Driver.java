@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-
 public class Driver {
     static StockItem milk;
     static StockItem bread;
@@ -9,63 +7,92 @@ public class Driver {
     public Driver() {
         milk = new StockItem("1 Gallon of Milk", 3.60f, 15);
         bread = new StockItem("1 Loaf of Bread", 1.98f, 30);
+
+        DisplayMenu();
+        while (readMenuChoice())
+        {
+            DisplayMenu();
+        }
     }
 
-    public static void ReadInput() {
+    public static boolean readMenuChoice() {
         Scanner sc = new Scanner(System.in);
 
         try {
             int input = sc.nextInt();
-            while (input != 8) {
-                switch (input) {
-                    case 1:
-                        milk.lowerQuantity();
-                        break;
-                    case 2:
-                        bread.lowerQuantity();
-                        break;
-                    case 3:
-                        float newPrice = readPrice(sc);
-                        milk.setPrice(input);
-                        break;
-                    case 4:
-                        float newPrice = readPrice(sc);
-                        bread.setPrice(input);
-                        break;
-                        break;
-                    case 5:
-
-                        break;
-                    case 6:
-
-                        break;
-                    case 7:
-                        System.out.println(milk);
-                        System.out.println(bread);
-                        break;
-                    default:
-                        break;
-                }
-
+            switch (input) {
+                case 1:
+                    milk.lowerQuantity();
+                    break;
+                case 2:
+                    bread.lowerQuantity();
+                    break;
+                case 3:
+                    float newMilkPrice = readPrice(sc);
+                    milk.setPrice(newMilkPrice);
+                    break;
+                case 4:
+                    float newBreadPrice = readPrice(sc);
+                    bread.setPrice(newBreadPrice);
+                    break;
+                case 5:
+                    int newMilkQuantity = readQuantity(sc);
+                    milk.raiseQuantity(newMilkQuantity);
+                    break;
+                case 6:
+                    int newBreadQuantity = readQuantity(sc);
+                    bread.raiseQuantity(newBreadQuantity);
+                    break;
+                case 7:
+                    System.out.println(milk);
+                    System.out.println(bread);
+                    break;
+                case 8:
+                    sc.close();
+                    return false;
+                default:
+                    break;
             }
         } catch (Exception e) {
             System.out.println("Invalid input!");
+
+            return true;
         }
+
+        return true;
     }
 
-    public static float readPrice(Scanner sc)
-    {
-        try {
-            float input = sc.nextFloat();
+    public static float readPrice(Scanner sc) {
+        boolean gotInput = false;
+        float input = 0.0f;
 
-
-
-            return input;
-        } catch (Exception e) {
-            // TODO: handle exception
-
-            return 0.0f;
+        while (!gotInput) {
+            try {
+                input = sc.nextFloat();
+                gotInput = true;
+            } catch (Exception e) {
+                System.out.println("Invalid input!");
+            }
         }
+
+        return input;
+    }
+
+    // TODO: Fix invalid input here!
+    public static int readQuantity(Scanner sc) {
+        boolean gotInput = false;
+        int input = 0;
+
+        while (!gotInput) {
+            try {
+                input = sc.nextInt();
+                gotInput = true;
+            } catch (Exception e) {
+                System.out.println("Invalid input!");
+            }
+        }
+
+        return input;
     }
 
     public static void DisplayMenu() {
@@ -77,5 +104,6 @@ public class Driver {
         System.out.println("6. Add Bread to Inventory");
         System.out.println("7. See Inventory");
         System.out.println("8. Quit");
+        System.out.println();
     }
 }
