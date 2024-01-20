@@ -7,7 +7,10 @@ public class Driver {
     public Driver() {
         milk = new StockItem("1 Gallon of Milk", 3.60f, 15);
         bread = new StockItem("1 Loaf of Bread", 1.98f, 30);
+    }
 
+    public void startDriver()
+    {
         DisplayMenu();
         while (readMenuChoice())
         {
@@ -15,7 +18,7 @@ public class Driver {
         }
     }
 
-    public static boolean readMenuChoice() {
+    private boolean readMenuChoice() {
         Scanner sc = new Scanner(System.in);
 
         try {
@@ -55,14 +58,14 @@ public class Driver {
             }
         } catch (Exception e) {
             System.out.println("Invalid input!");
-
+            sc.nextLine();
             return true;
         }
 
         return true;
     }
 
-    public static float readPrice(Scanner sc) {
+    private float readPrice(Scanner sc) {
         boolean gotInput = false;
         float input = 0.0f;
 
@@ -72,14 +75,14 @@ public class Driver {
                 gotInput = true;
             } catch (Exception e) {
                 System.out.println("Invalid input!");
+                sc.nextLine();
             }
         }
 
         return input;
     }
 
-    // TODO: Fix invalid input here!
-    public static int readQuantity(Scanner sc) {
+    private int readQuantity(Scanner sc) {
         boolean gotInput = false;
         int input = 0;
 
@@ -89,13 +92,14 @@ public class Driver {
                 gotInput = true;
             } catch (Exception e) {
                 System.out.println("Invalid input!");
+                sc.nextLine();
             }
         }
 
         return input;
     }
 
-    public static void DisplayMenu() {
+    private void DisplayMenu() {
         System.out.println("1. Sold One Milk");
         System.out.println("2. Sold One Bread");
         System.out.println("3. Change price of Milk");
