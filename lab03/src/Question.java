@@ -1,21 +1,7 @@
-enum Difficulty {
-    EASY(1),
-    HARD(2),
-    HARDCORE(3);
-
-    private int value;
-    private Difficulty(int value) {
-        this.value = value;
-    }
-    public int getValue() {
-        return this.value;
-    }
-}
-
 public class Question {
     private String question;
     private String answer;
-    private Difficulty difficulty;
+    private String difficulty;
     public String getQuestion() {
         return question;
     }
@@ -32,15 +18,15 @@ public class Question {
         this.answer = answer;
     }
 
-    public Difficulty getDifficulty() {
+    public String getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 
-    public Question(String question, String answer, Difficulty difficulty)
+    public Question(String question, String answer, String difficulty)
     {
         this.question = question;
         this.answer = answer;
