@@ -1,4 +1,5 @@
 public class Driver {
+
     public static void main(String[] args) {
         Quiz quiz = new Quiz();
 
@@ -28,8 +29,6 @@ public class Driver {
             }
         }
 
-
-        Test.run();
         Input.closeScanner();
     }
 

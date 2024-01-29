@@ -3,4 +3,5 @@ public enum InputType {
     ANSWER,
     DIFFICULTY,
     MENU_CHOICE,
+    SELECT_QUESTION,
 }

@@ -1,8 +1,7 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Input {
-    private static Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in);
     private static int[] menuOptions = {1,2,3,4,5};
 
     public static String read_input(InputType inputType) {
@@ -60,6 +59,16 @@ public class Input {
                         System.out.println(e);
                     }
                     break;
+                case SELECT_QUESTION:
+                    // TODO: make sure selected question exists...
+                    try {
+                        int input = sc.nextInt();
+                        sc.nextLine();
+                        result = Integer.toString(input);
+                        inputSuccess = true;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
                 default:
                     break;
             }
