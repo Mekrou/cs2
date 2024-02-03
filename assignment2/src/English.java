@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 class English {
-  public ArrayList<String> words = new ArrayList<String>();
+  public static ArrayList<String> words = new ArrayList<String>();
 
-  public English() {
+  static {
     words.ensureCapacity(901);
     words.add("a");
     words.add("ability");
