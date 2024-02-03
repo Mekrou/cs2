@@ -16,7 +16,8 @@ class WheelOfFortune
         return false;
     }
 
-    
+    // I'm aware of .contains(), but I wanted to give this a try as a challenge.
+    // Was it fun? Mostly...
     public boolean wordContainsString(String A, String B)
     {
         byte[] aAsBytes = A.getBytes();
@@ -63,5 +64,19 @@ class WheelOfFortune
             }
         }
         return false;
+    }
+
+    public void guessWordWithLetters(English eng, int length, String letters)
+    {
+        // Find the words that are three letters long
+        for (int i = 0; i < eng.words.size(); i++) {
+            String currentWord = eng.words.get(i);
+            if (currentWord.length() == length) {
+                // Does the word contain the correct letters?
+                if (wordContainsString(currentWord, letters)) {
+                    System.out.println(currentWord);
+                }
+            }
+        }
     }
 }
