@@ -1,5 +1,6 @@
 public class App {
     public static void main(String[] args) {
-        System.out.println(English.words);
+        WheelOfFortune wof = new WheelOfFortune();
+        System.out.println(wof.wordContainsLetter("hello", 'l'));
     }
 }
