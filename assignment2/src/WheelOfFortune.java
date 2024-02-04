@@ -1,12 +1,11 @@
-class WheelOfFortune
-{
-    public WheelOfFortune()
-    {
+import java.util.ArrayList;
+
+class WheelOfFortune {
+    public WheelOfFortune() {
 
     }
 
-    public boolean wordContainsLetter(String word, char letter)
-    {
+    public boolean wordContainsLetter(String word, char letter) {
         char[] asChars = word.toCharArray();
         for (char currLetter : asChars) {
             if (currLetter == letter) {
@@ -17,9 +16,8 @@ class WheelOfFortune
     }
 
     // I'm aware of .contains(), but I wanted to give this a try as a challenge.
-    // Was it fun? Mostly...
-    public boolean wordContainsString(String A, String B)
-    {
+    // Was it fun? For me? Mostly.. For whoever has to read this? Probably not..
+    public boolean wordContainsString(String A, String B) {
         byte[] aAsBytes = A.getBytes();
         byte[] bAsBytes = B.getBytes();
         boolean beganMatch = false;
@@ -39,18 +37,16 @@ class WheelOfFortune
             return false;
         }
 
-        for (short i = 0; i < A.length(); i++)
-        {
+        for (short i = 0; i < A.length(); i++) {
             if (beganMatch) {
                 short k = (short) (firstOccuranceIndex + 1);
                 for (short j = 1; j < B.length() + 1; j++) {
-                    if (aAsBytes[k] == bAsBytes[j] && aAsBytes.length < k) {
+                    if (k < aAsBytes.length && aAsBytes[k] == bAsBytes[j]) {
                         lettersFound++;
                         k++;
                         if (B.length() == lettersFound)
                             return true;
-                    }
-                    else {
+                    } else {
                         beganMatch = false;
                         lettersFound = 0;
                         break;
@@ -68,23 +64,43 @@ class WheelOfFortune
 
     // This doesn't account for duplicate letters in the input, but it was not
     // listed as a requirement in the assignment description.
-    // use 'test' to see what I'm talking about
-    public void guessWordWithLetters(English eng, int length, String letters)
-    {
-        // Find the words that are three letters long
+    // input letters='test' to see what I'm talking about
+    public void guessWordWithLetters(English eng, int length, String letters) {
+        String[] words = getWordsWithLength(eng, length);
+
+        for (String word : words) {
+            char[] lettersToMatch = letters.toCharArray();
+            short lettersMatched = 0;
+            for (char letterToMatch : lettersToMatch) {
+                if (wordContainsLetter(word, letterToMatch))
+                    lettersMatched++;
+            }
+            if (lettersMatched == letters.length())
+                System.out.println(word);
+            }
+        
+    }
+
+    public void guessWordWithPattern(English eng, int length, String pattern) {
+        String[] words = getWordsWithLength(eng, length);
+        for (String word : words) {
+            if (wordContainsString(word, pattern)) {
+                System.out.println(word);
+            }
+        }
+    }
+
+    public String[] getWordsWithLength(English eng, int length) {
+        ArrayList<String> wordsList = new ArrayList<String>();
+
         for (int i = 1; i < eng.words.size(); i++) {
             String currentWord = eng.words.get(i);
             if (currentWord.length() == length) {
-                // Does the word contain the correct letters?
-                char[] charLetters = letters.toCharArray();
-                short lettersMatched = 0;
-                for (char charLetter : charLetters) {
-                    if (wordContainsLetter(currentWord, charLetter))
-                        lettersMatched++;
-                }
-                if (lettersMatched == letters.length())
-                    System.out.println(currentWord);
+                wordsList.add(currentWord);
             }
         }
+        
+        String[] words = wordsList.toArray(new String[wordsList.size()]);
+        return words;
     }
 }
