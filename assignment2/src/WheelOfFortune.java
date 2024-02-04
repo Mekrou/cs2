@@ -77,8 +77,8 @@ class WheelOfFortune {
             }
             if (lettersMatched == letters.length())
                 System.out.println(word);
-            }
-        
+        }
+
     }
 
     public void guessWordWithPattern(English eng, int length, String pattern) {
@@ -99,7 +99,7 @@ class WheelOfFortune {
                 wordsList.add(currentWord);
             }
         }
-        
+
         String[] words = wordsList.toArray(new String[wordsList.size()]);
         return words;
     }
