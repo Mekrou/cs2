@@ -44,7 +44,7 @@ class WheelOfFortune
             if (beganMatch) {
                 short k = (short) (firstOccuranceIndex + 1);
                 for (short j = 1; j < B.length() + 1; j++) {
-                    if (aAsBytes[k] == bAsBytes[j]) {
+                    if (aAsBytes[k] == bAsBytes[j] && aAsBytes.length < k) {
                         lettersFound++;
                         k++;
                         if (B.length() == lettersFound)
@@ -66,16 +66,24 @@ class WheelOfFortune
         return false;
     }
 
+    // This doesn't account for duplicate letters in the input, but it was not
+    // listed as a requirement in the assignment description.
+    // use 'test' to see what I'm talking about
     public void guessWordWithLetters(English eng, int length, String letters)
     {
         // Find the words that are three letters long
-        for (int i = 0; i < eng.words.size(); i++) {
+        for (int i = 1; i < eng.words.size(); i++) {
             String currentWord = eng.words.get(i);
             if (currentWord.length() == length) {
                 // Does the word contain the correct letters?
-                if (wordContainsString(currentWord, letters)) {
-                    System.out.println(currentWord);
+                char[] charLetters = letters.toCharArray();
+                short lettersMatched = 0;
+                for (char charLetter : charLetters) {
+                    if (wordContainsLetter(currentWord, charLetter))
+                        lettersMatched++;
                 }
+                if (lettersMatched == letters.length())
+                    System.out.println(currentWord);
             }
         }
     }
