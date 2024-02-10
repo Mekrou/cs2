@@ -6,9 +6,8 @@ public class Driver {
     public static void main(String[] args) {
         Checking checking = new Checking(0);
         Savings savings = new Savings(0);
-        Driver.sc = new Scanner(System.in);
-
         int input = 0;
+        Scanner sc = new Scanner(System.in);
         do {
             display_menu();
             try {
@@ -40,10 +39,8 @@ public class Driver {
             } catch (Exception e) {
                 System.out.println("Invalid input detected: ");
                 System.out.println("  " + e);
-
-                if(e.getMessage() == null)
-                    sc.nextLine();
             } 
+            sc.close();
         } while (input != 8);
     }
 
@@ -65,15 +62,7 @@ public class Driver {
 
     public static void withdrawling(Account typeOfAccount) {
         System.out.println("How much would you like to withdraw?");
-
-
-
-        if (typeOfAccount instanceof Checking) {
-
-        } else if (typeOfAccount instanceof Savings)
-        {
-
-        }
+        float input = readFloatInput();
     }
 
     public static void depositing(Account typeOfAccount) {
@@ -86,5 +75,21 @@ public class Driver {
 
     public static void awardInterest() {
 
+    }
+
+    public static float readFloatInput() {
+        boolean isInvalidInput = true;
+        float input = 0.0f;
+        do {
+            try (Scanner sc = new Scanner(System.in)) {
+                input = sc.nextFloat();
+                isInvalidInput = false;
+            } catch (Exception e) {
+                System.out.println("Invalid input. Try again.");
+                sc.nextLine();
+            }
+        } while (isInvalidInput);
+
+        return input;
     }
 }
