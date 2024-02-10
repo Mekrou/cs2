@@ -1,7 +1,8 @@
 public class Account {
     protected static int initAccountNumber;
-    protected int number;
-    protected float balance;
+    private int number;
+    private float balance;
+    private String accountType;
 
     public int getNumber() {
         return this.number;
@@ -13,6 +14,14 @@ public class Account {
     
     public void setBalance(float newBalance) {
         this.balance = newBalance;
+    }
+
+    public String getAccountType() {
+        return this.accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public void withdrawal(float amount) {
@@ -35,7 +44,7 @@ public class Account {
         this.number = initAccountNumber;
         initAccountNumber++;
         this.balance = 0.0f;
-
+        this.accountType = "default account";
     }
 
     public Account(float initialBalance) {
