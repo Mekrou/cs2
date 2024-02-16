@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Driver {
     private static Scanner sc;
+    private String test = "hi";
 
     public static void main(String[] args) {
         Checking checking = new Checking(0);
