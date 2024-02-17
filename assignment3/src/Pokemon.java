@@ -1,9 +1,9 @@
 public class Pokemon {
-    private short level;
+    private int level;
     private double baseCatchRate;
     private String name;
 
-    public short getLevel() {
+    public int getLevel() {
         return this.level;
     }
 
@@ -15,7 +15,7 @@ public class Pokemon {
         return this.name;
     }
     
-    public Pokemon(short level, double baseCatchRate, String name) {
+    public Pokemon(int level, double baseCatchRate, String name) {
         this.level = level;
         this.baseCatchRate = baseCatchRate;
         this.name = name;

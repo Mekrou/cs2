@@ -1,5 +1,5 @@
 public class Charmander extends Pokemon {
-    public Charmander(short level) {
+    public Charmander(int level) {
         super(level, 0.2, "Charmander");
     }
 }
