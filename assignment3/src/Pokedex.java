@@ -11,6 +11,12 @@ public class Pokedex {
         myPokemon.add(pokemon);
     }
 
+    public void printPokedex() {
+        for (Pokemon pokemon : myPokemon) {
+            System.out.println(pokemon);
+        }
+    }
+
     public String toString() {
         String pokemons = "";
         for (Pokemon pokemon : myPokemon) {
