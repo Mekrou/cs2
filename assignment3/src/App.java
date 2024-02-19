@@ -33,6 +33,7 @@ public class App {
                 isPlaying = false;
             }
         }
+        System.out.println("You have the following pokemon:");
         myDex.printPokedex();
         sc.close();
     }
