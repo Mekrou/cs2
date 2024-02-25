@@ -3,17 +3,37 @@ import java.util.Scanner;
 
 public class GuessNumber {
 
-    public Scanner sc;
+    private Scanner sc;
+    private final int BOUND = 100;
+    private final int guess;
+    private Language lang;
 
     public GuessNumber() {
+        Random rand = new Random();
+        this.guess = rand.nextInt(BOUND);
         this.sc = new Scanner(System.in);
     }
 
     public void play_game() throws Exception {
-        final int BOUND = 100;
-        Random rand = new Random();
-        int guess = rand.nextInt(BOUND);
-        Language lang = new English();
+        getUserLanguage();
+
+        boolean guessing = true;
+        while (guessing) {
+            System.out.print(lang.make_guess() + "\n > ");
+            int userGuess = readUserIntInput(0, BOUND);
+            String guessResult = resolveGuess(userGuess);
+            if (guessResult.equals("correct")) {
+                System.out.println(lang.correct());
+                guessing = false;
+            } else if (guessResult.equals("too high")) {
+                System.out.println(lang.too_high());
+            } else if (guessResult.equals("too low")) {
+                System.out.println(lang.too_low());
+            } 
+        }
+    }
+
+    private void getUserLanguage() throws Exception {
         System.out.println("Choose your language");
         System.out.println(" 1. English");
         System.out.println(" 2. Español");
@@ -22,25 +42,32 @@ public class GuessNumber {
         int choice = readUserIntInput(1,4);
         switch (choice) {
             case 1:
-                lang = new English();
+                this.lang = new English();
                 break;
             case 2:
-                lang = new Spanish();
+                this.lang = new Spanish();
                 break;
             case 3:
-                lang = new French();
+                this.lang = new French();
                 break;
             case 4:
-                lang = new SimplifiedChinese();
+                this.lang = new SimplifiedChinese();
                 break;
             default:
-                throw new Exception("Error resolving choice!");
+                throw new Exception("Error resolving language choice!");
         }
-
-        System.out.print(lang.make_guess() + "\n > ");
-        int userGuess = readUserIntInput(0, BOUND);
     }
     
+    private String resolveGuess(int userGuess) {
+        if (userGuess == this.guess) {
+            return "correct";
+        } else if (userGuess > this.guess) {
+            return "too high";
+        } else if (userGuess < this.guess) {
+            return "too low";
+        } else 
+            return "";
+    }
     /**
      * Reads user input until a valid integer is read, handling exceptions & out of bounds choices. 
      * @param min the minimum number the user can input, inclusive
@@ -63,10 +90,5 @@ public class GuessNumber {
             }
         }
         return input;
-    }
-
-    public static void main(String[] args) throws Exception {
-        GuessNumber game = new GuessNumber();
-        game.play_game();
     }
 }
