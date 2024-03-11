@@ -68,16 +68,21 @@ class Family {
 
         // If you find any, add them to the List. Be sure to avoid duplicates
 
-        ArrayList<Integer> children = new ArrayList<Integer>();
+        ArrayList<Integer> childrenIDs = new ArrayList<Integer>();
         for (int i = 0; i < family.size(); i++) {
             Person currentPerson = family.get(i);
             if (currentPerson.getParent1() == id || currentPerson.getParent2() == id) {
-                if (!family.contains(currentPerson)) {
-                    children.add(currentPerson.getID());
+                boolean alreadyAdded = false;
+                for (Integer childID : childrenIDs) {
+                    if (childID == currentPerson.getID())
+                        alreadyAdded = true;
                 }
+
+                if (!alreadyAdded)
+                    childrenIDs.add(currentPerson.getID());
             }
         }
-        return children;
+        return childrenIDs;
     }
 
     public int[] getParents(int ID) {
@@ -107,6 +112,13 @@ class Family {
         // * Create an array of ints, and store the childID's parents in it.
         // * Using recursion, find the first parents parents
         // * Using recursion, find the second parents parents
+
+        if (childID == -1)
+            return;
+
+        System.out.println(relationship + " " + getNameFromID(childID));
+        printParents(getParents(childID)[0], parentRelationship(relationship));
+        printParents(getParents(childID)[1], parentRelationship(relationship));
     }
 
     public void printChildren(int parentID, String relationship) {
@@ -118,5 +130,15 @@ class Family {
         // * Figure out the relationship of this the next childs generation.
         // * Create a list of ints, and store the parentID's children in it.
         // * Using recursion, recurse over each child
+
+        if (parentID == -1)
+            return;
+
+        System.out.println(relationship + " " + getNameFromID(parentID));
+        ArrayList<Integer> childrenIDs = getChildrenIDs(parentID);
+        for (Integer id : childrenIDs) {
+            printChildren(id, childRelationship(relationship));
+        }
+
     }
 }
