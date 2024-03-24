@@ -1,68 +1,74 @@
-// You’ll need two text files to test your code. Using your favorite text editor (notepad on
-// windows, or textedit on mac, or similar) create two files with almost the same text in
-// each. Be sure to save it as a text (.txt) file, not a .doc or anything else.
-// 2. Write a program to compare the two files and output their differences.
-// a. Prompt the user for both file names.
-// b. Open both files, and read them in line by line. Keep track of what line number
-// you are on.
-// c. Compare the line you read from file one, with the line you read from file two.
-// i. If they are the same, do nothing.
-// ii. If they are different, output the differences as follows:
-// 1. You’ll first output the line number that is different,
-// 2. Next, you’ll output the symbol “< ” and then the line from the first
-// file.
-// 3. Finally, output a “> ” and the line from the second file.
-// d. If the two files have a different number of lines, you should output “Files have
-// different number of lines”/
-// 3. Be sure to handle all IO exceptions that could occur.
-
 import java.io.*;
 import java.util.*;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        try {
-            String[] fileNames = askForFileNames();
+    static boolean validFileNames = false;
+    static String[] fileNames = new String[2];
+    static Scanner[] files = new Scanner[2];
+    static Scanner keyboard = new Scanner(System.in);
 
-            
-        } catch (Exception e) {
-            System.out.println(e);
+    public static void main(String[] args) throws Exception {
+        while (!validFileNames) {
+            fileNames = askForFileNames();
+            files = openFiles(fileNames);
         }
+        keyboard.close();
+
+        try {
+            short lineNumber = 1;
+            while (files[0].hasNextLine() || files[1].hasNextLine()) {
+                String dataline1 = files[0].nextLine();
+                String dataline2 = files[1].nextLine();
+                
+                if (!dataline1.equals(dataline2)) {
+                    System.out.println("Line " + lineNumber);
+                    System.out.println("< " + dataline1 + "\n> " + dataline2);
+                }
+                
+                lineNumber++;
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Files have different number of lines");
+        } 
     }
 
-    public static Scanner[] openFiles(String[] fileNames) {
-        Scanner[] scanners = {};
-        for (String file : fileNames) {
-            Scanner sc = new Scanner(file);
-            
-        }
-    } 
+    public static String compareLines(String a, String b) {
+        String message = new String();
 
-    public static void readTextFile(File file) {
+        if (!a.equals(b)) {
+            message = "< " + a + "\n> " + b;
+        }
+
+        return message;
+    }
+
+    // Creates readable scanners for the files the user entered in askForFileNames()
+    public static Scanner[] openFiles(String[] fileNames) {
+        Scanner[] scanners = new Scanner[2];
         try {
-            Scanner fileScanner = new Scanner(file);
-            while (fileScanner.hasNextLine()) {
-                String dataline = fileScanner.nextLine();
-                System.out.println(dataline);
+            for (int i = 0; i < fileNames.length; i++) {
+                File file = new File(fileNames[i]);
+                scanners[i] = new Scanner(file);
             }
-        } catch (Exception e) {
-            System.out.println(e);
+
+            validFileNames = true;
+        } catch (FileNotFoundException e) {
+            System.out.println("At least one of those files could not be found. Please re-enter them.");
         }
         
-
-    }
+        return scanners;
+    } 
 
     // Prompts users to enter the two names of the files they want to compare
     public static String[] askForFileNames() {
         try {
-            Scanner sc = new Scanner(System.in);
             System.out.println("Enter the first file name: ");
-            String first = sc.next();
-            sc.nextLine();
+            String first = keyboard.next();
+            keyboard.nextLine();
 
             System.out.println("Enter the second file name: ");
-            String second = sc.next();
-            sc.nextLine();
+            String second = keyboard.next();
+            keyboard.nextLine();
 
             String[] choices = { first, second };
             return choices;
