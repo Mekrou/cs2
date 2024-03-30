@@ -24,7 +24,7 @@ public class KeyboardReader {
     }
 
     public void prompt(String s) {
-        System.out.println(s);
+        System.out.print(s);
     }
 
     public void display(String s) {
