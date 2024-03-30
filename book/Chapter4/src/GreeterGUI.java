@@ -19,6 +19,7 @@ public class GreeterGUI extends JFrame implements ActionListener{
 
         prompt = new JLabel("Please type your name here: ");
         inField = new JTextField(10);
+        inField.addActionListener(this);
         display = new JTextArea(10, 30);
         goButton = new JButton("Click here for a greeting!");
         goButton.addActionListener(this);
@@ -40,6 +41,12 @@ public class GreeterGUI extends JFrame implements ActionListener{
         {
             String name = inField.getText();
             display.append(greeter.greet(name) + "\n");
+        }
+        if (e.getSource() == inField) 
+        {
+            String name = inField.getText();
+            display.append(greeter.greet(name) + "\n");
+            inField.setText(null);
         }
     }
 
