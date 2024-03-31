@@ -17,6 +17,9 @@ public class Driver {
                 if (input >= 0 && input <= 6) {
                     game.dropPiece(input, game.getNextToken());
                     game.nextTurn();
+                } else if (input == 7)
+                {
+                    saveGame();
                 }
 
             } catch (InputMismatchException e) {

@@ -60,4 +60,8 @@ public class ConnectFour {
         to_return += "\n-----------------------------\n";
         return to_return;
     }
+
+    public void saveGame() {
+        
+    }
 }
