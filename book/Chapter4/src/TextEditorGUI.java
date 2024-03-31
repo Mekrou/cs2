@@ -40,10 +40,6 @@ public class TextEditorGUI extends JFrame implements ActionListener {
         contentPane.add("Center", display);
     }
 
-    public String getInputText() {
-        return inTextField.getText();
-    }
-
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == writeButton) {
             textEditor.writeFile(inTextField.getText(), display.getText());
