@@ -1,30 +1,33 @@
 
+class MyFirstThread implements Runnable {
+  static int next_tid=1;
+  int tid;
 
-import java.io.*;
-import java.io.File;
-import java.io.IOException;
-
-
-class Main {
-  public static void write_file(String filename, String line, int x) {
-    try {
-      File myFile=new File(filename);
-      PrintWriter theFile = new PrintWriter(myFile);
-      for(int i=0;i<x;i++) {
-        theFile.println(line);
-      }
-      theFile.close();
-    }
-    catch(IOException e) {
-      System.out.println("Error reading file: "+e.getMessage());
-    }  
+  public MyFirstThread() {
+    tid=next_tid++;
   }
 
-
-  public static void main(String[] args) {
-    write_file("A.txt","Hi",3);
-    write_file("A.txt","Hi",3);
+  public void run() {
+    System.out.println("I'm thread "+tid);
   }
 }
+ 
+class Main {
+  public static void main(String[] args) {
+    MyFirstThread t1 = new MyFirstThread();
+    MyFirstThread t2 = new MyFirstThread();
+    MyFirstThread t3 = new MyFirstThread();
 
+    Thread thread1 = new Thread(t1);
+    Thread thread2 = new Thread(t2);
+    Thread thread3 = new Thread(t3);
 
+    System.out.println("Let's go!");
+    thread1.start();
+    thread2.start();
+    thread3.start();
+
+    Thread.sleep(10000);
+    System.out.println("Done");
+  }
+}
