@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class ConnectFour {
     private char[][] board;
     private String currentTurn;
@@ -62,6 +68,49 @@ public class ConnectFour {
     }
 
     public void saveGame() {
-        
+        System.out.print("Enter a savename: ");
+        try {
+            Scanner keyboard = Driver.getKeyboard();
+            String input = keyboard.next();
+
+            File file = new File(input);
+            PrintWriter writer = new PrintWriter(file);
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    writer.print(board[i][j] + ",");
+                }
+                writer.println();
+            }
+            writer.close();
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadGame() {
+        System.out.println("Enter a savename: ");
+        try {
+            Scanner keyboard = Driver.getKeyboard();
+            String input = keyboard.next();
+
+            File file = new File(input);
+            Scanner fileReader = new Scanner(file);
+            for (int i = 0; i < board.length; i++) {
+                if (fileReader.hasNext())
+                {
+                    String nextLine = fileReader.nextLine();
+                    String[] boardStrings = nextLine.split(",");
+                    for (int j = 0; j < boardStrings.length; j++)
+                    {
+                        board[i][j] = boardStrings[j].charAt(0);
+                    }
+                }
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("A savefile with that name could not be found.");
+            loadGame();
+        }
     }
 }

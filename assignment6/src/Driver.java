@@ -2,10 +2,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Driver {
+    private static Scanner keyboard;
+
+    static {
+        keyboard = new Scanner(System.in);
+    }
+
+    public static Scanner getKeyboard() {
+        return keyboard;
+    }
+
     public static void main(String[] args) {
         ConnectFour game = new ConnectFour();
         int input = 0;
-        Scanner keyboard = new Scanner(System.in);
 
         while (input != 9) {
             try {
@@ -17,9 +26,10 @@ public class Driver {
                 if (input >= 0 && input <= 6) {
                     game.dropPiece(input, game.getNextToken());
                     game.nextTurn();
-                } else if (input == 7)
-                {
-                    saveGame();
+                } else if (input == 7) {
+                    game.saveGame();
+                } else if (input == 8) {
+                    game.loadGame();
                 }
 
             } catch (InputMismatchException e) {
@@ -27,8 +37,8 @@ public class Driver {
             } catch (ColumnFull e) {
                 System.out.println(e.getMessage());
             }
-
         }
 
+        keyboard.close();
     }
 }

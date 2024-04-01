@@ -32,7 +32,6 @@ public class TextEditorGUI extends JFrame implements ActionListener {
         controlsJPanel.add(inTextField);
         controlsJPanel.add(readButton);
         controlsJPanel.add(writeButton);
-        
         display = new JTextArea(10, 15);
 
         Container contentPane = getContentPane();
