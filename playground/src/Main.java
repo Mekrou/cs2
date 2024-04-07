@@ -26,8 +26,7 @@ class Main {
     thread1.start();
     thread2.start();
     thread3.start();
-
-    Thread.sleep(10000);
+    
     System.out.println("Done");
   }
 }
