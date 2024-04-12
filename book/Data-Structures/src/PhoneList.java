@@ -1,0 +1,38 @@
+public class PhoneList { 
+    private PhoneListNode head; 
+    public PhoneList () 
+    { 
+        head = null ; // S t a r t w i t h e m p t y l i s t 
+    } 
+    public boolean isEmpty ( ) { // D e f i n e s an empty l i s t 
+        return head == null; 
+    } 
+    
+    public void insert ( PhoneListNode node ) { 
+        if (isEmpty()) {
+            this.head = node;
+            node.setNext(null);
+        } else {
+            PhoneListNode currNode = this.head;
+            while (currNode.getNext() != null)
+            {
+                currNode = currNode.getNext();
+            }
+            currNode.setNext(node);
+        }
+    } 
+    public String getPhone ( String name ) {
+
+    } 
+    // public String remove ( String name ) { } 
+    public void print () { 
+        if (isEmpty()) 
+            System.out.println("List is empty");
+        PhoneListNode currNode = this.head;
+        while (currNode != null)
+        {
+            System.out.println(currNode);
+            currNode = currNode.getNext();
+        }
+    } // P h o n e L i s t
+}

@@ -1,5 +1,3 @@
-package book.Node;
-
 public class NodeImpl
 {
     private String data;

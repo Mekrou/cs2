@@ -1,7 +1,3 @@
-package book.Node;
-
-import book.Node.NodeImpl;
-
 public class Node
 {
     public static void main(String[] args)
