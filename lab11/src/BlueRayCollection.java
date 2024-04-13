@@ -5,7 +5,7 @@ public class BlueRayCollection {
         this.head = null;
     }
 
-    public boolean isEmpty() {
+    private boolean isEmpty() {
         return head == null;
     }
 
