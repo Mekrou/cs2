@@ -29,6 +29,18 @@ public class Prime {
         }
     }
 
+    public boolean isPrime(int number) {
+        for (Integer num : numbers) {
+            if (num == number)
+                return true;
+        }
+        return false;
+    }
+
+    public int getPrime(int index) {
+        return numbers.get(index);
+    }
+
     public void printPrimes() {
         for (int i = 0; i < numbers.size(); i++) {
             System.out.println(numbers.get(i));
