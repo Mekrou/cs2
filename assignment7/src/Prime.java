@@ -10,7 +10,7 @@ public class Prime {
 
     private void findPrimes(int max) {
         LinkedList<Boolean> primeFlags = new LinkedList<>();
-        // init all elements to true;
+
         for (int i = 0; i < max; i++) {
             primeFlags.add(i, true);
         }
