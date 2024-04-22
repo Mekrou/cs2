@@ -1,32 +1,32 @@
 
-class MyFirstThread implements Runnable {
-  static int next_tid=1;
-  int tid;
 
-  public MyFirstThread() {
-    tid=next_tid++;
-  }
+class Node {
+  public char letter;
+  public Node next;
 
-  public void run() {
-    System.out.println("I'm thread "+tid);
+  public Node(char letter) {
+    this.letter=letter;
+    next=null;
   }
 }
- 
 class Main {
+  public static void dostuff(Node head) {
+    if(head!=null) {
+      dostuff(head.next);
+      System.out.print(head.letter);
+    }
+  }  
+
   public static void main(String[] args) {
-    MyFirstThread t1 = new MyFirstThread();
-    MyFirstThread t2 = new MyFirstThread();
-    MyFirstThread t3 = new MyFirstThread();
+    Node head = null;
 
-    Thread thread1 = new Thread(t1);
-    Thread thread2 = new Thread(t2);
-    Thread thread3 = new Thread(t3);
+    head=new Node('A'); 
+    head.next=new Node('B');
+    head.next.next=new Node('C');
+    head.next.next.next=new Node('D');
+    head.next.next.next.next=new Node('E');
 
-    System.out.println("Let's go!");
-    thread1.start();
-    thread2.start();
-    thread3.start();
-    
-    System.out.println("Done");
+    dostuff(head);
   }
 }
+

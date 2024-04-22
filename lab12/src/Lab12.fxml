@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" spacing="20.0" style="-fx-spacing: 5;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab12.Controller">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <HBox alignment="CENTER" prefHeight="88.0" prefWidth="360.0" spacing="5" style="-fx-spacing: 20;">
+      <children>
+         <TextField fx:id="num1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="103.0" promptText="Enter Number" scaleShape="false" />
+         <Button fx:id="addButton" onAction="#onAddButtonClick" mnemonicParsing="false" text="+" />
+         <TextField fx:id="num2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="107.0" promptText="Enter Number" />
+      </children>
+   </HBox>
+
+    <Label id="result" fx:id="result" prefHeight="29.0" prefWidth="370" />
+    <Button onAction="#onClearButtonClick" prefHeight="25.0" prefWidth="69.0" text="Clear" />
+</VBox>
